@@ -8,13 +8,12 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.stereotype.Component;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
 import java.util.UUID;
 
-@Component
+// @Component
 @RequiredArgsConstructor
 public class MessageListener {
 
@@ -33,7 +32,8 @@ public class MessageListener {
   public void listenForHello(
       @Payload final HelloMessage helloMessage,
       @Headers final MessageHeaders headers,
-      final Message message)
+      final Message message,
+      final org.springframework.messaging.Message springMessage)
       throws JMSException {
     final HelloMessage replyMessage =
         HelloMessage.builder().id(UUID.randomUUID()).message("World!").build();
